@@ -1,0 +1,180 @@
+reward_command: points give %player% %points%
+
+place_rewards:
+  '1': 500
+  '2': 300
+  '3': 150
+  '4': 75
+  '5': 25
+
+bosses:
+  ravager:
+    enabled: true
+    name: '&#8B0000В&#8F0500е&#930A00л&#971000и&#9B1500к&#9F1A00и&#A31F00й &#AB2900Р&#AF2E00а&#B33300з&#B73800о&#BB3D00р&#BF4200и&#C34700т&#C74C00е&#CB5100л&#CF5600ь'
+    entity_type: RAVAGER
+    health: 2000.0
+    damage_multiplier: 6.0
+    pull_radius: 35.0
+    rewards:
+      - DIAMOND 8
+      - EMERALD 16
+      - GOLDEN_APPLE 4
+      - NETHER_STAR 1
+      - NETHERITE_SCRAP 2
+    abilities:
+      - SPEED
+      - INCREASE_DAMAGE
+      - REGENERATION
+    spawn_message: '&cВеликий Разоритель вырвался из заточения!'
+    death_message: '&aВеликий Разоритель повержен!'
+    place_rewards:
+      '1': 1500
+      '2': 800
+      '3': 500
+      '4': 300
+      '5': 150
+
+  ice_giant:
+    enabled: true
+    name: '&#00FFFFЛ&#00EEFFе&#00DDFFд&#00CCFFя&#00BBFFн&#00AAFFо&#0099FFй &#0077FFТ&#0066FFи&#0055FFт&#0044FFа&#0033FFн'
+    entity_type: IRON_GOLEM
+    health: 3000.0
+    damage_multiplier: 8.0
+    pull_radius: 40.0
+    rewards:
+      - DIAMOND_BLOCK 3
+      - NETHERITE_INGOT 2
+      - EXPERIENCE_BOTTLE 64
+      - GOLDEN_APPLE 8
+      - NETHER_STAR 2
+    abilities:
+      - SPEED
+      - RESISTANCE
+      - INCREASE_DAMAGE
+    spawn_message: '&bЛедяной Титан замораживает земли! Никто не спасётся!'
+    death_message: '&aЛедяной Титан раскололся на тысячи осколков!'
+    place_rewards:
+      '1': 1500
+      '2': 1000
+      '3': 600
+      '4': 300
+      '5': 100
+
+  shadow_knight:
+    enabled: true
+    name: '&#555555Т&#4A4A4Aе&#404040н&#353535е&#2B2B2Bв&#202020о&#161616й &#0B0B0BВ&#000000л&#0A0A0Aа&#141414д&#1E1E1Eы&#282828к&#323232а'
+    entity_type: WITHER_SKELETON
+    health: 900.0
+    damage_multiplier: 7.0
+    pull_radius: 30.0
+    rewards:
+      - NETHERITE_SCRAP 8
+      - WITHER_SKELETON_SKULL 2
+      - COAL_BLOCK 8
+      - GOLDEN_APPLE 4
+    abilities:
+      - SPEED
+      - JUMP
+      - INCREASE_DAMAGE
+      - REGENERATION
+    spawn_message: '&7Теневой Владыка поглощает свет! Тьма наступает!'
+    death_message: '&aТьма рассеялась, владыка повержен!'
+    place_rewards:
+      '1': 800
+      '2': 550
+      '3': 300
+      '4': 150
+      '5': 50
+
+  easy_boss:
+    enabled: true
+    name: '&#55FF55Г&#4AEE4Aн&#40DD40и&#35CC35ю&#2BBB2Bщ&#20AA20и&#159915й &#0A880AС&#007700т&#008800р&#009900а&#00AA00ж'
+    entity_type: ZOMBIE
+    health: 600.0
+    damage_multiplier: 4.0
+    pull_radius: 25.0
+    rewards:
+      - GOLDEN_APPLE 3
+      - IRON_BLOCK 4
+      - DIAMOND 2
+      - ROTTEN_FLESH 64
+    abilities:
+      - SPEED
+      - REGENERATION
+      - INCREASE_DAMAGE
+    spawn_message: '&aГниющий Страж вылез из могилы! Приготовьтесь!'
+    death_message: '&aСтраж окончательно мертв!'
+    place_rewards:
+      '1': 300
+      '2': 200
+      '3': 100
+      '4': 50
+      '5': 10
+
+altar:
+  block_material: END_PORTAL_FRAME
+  seal_material: NETHER_STAR
+  seal_name: '&#FFAA00Д&#FFBB11р&#FFCC22е&#FFDD33в&#FFEE44н&#FFFF55я&#FFFF66я &#FFEE44П&#FFDD33е&#FFCC22ч&#FFBB11а&#FFAA00т&#FF9900ь'
+  seal_lore:
+    - '&7Нажмите &#E0C912ПКМ &7по Магическому Алтарю,'
+    - '&7чтобы установить эту печать.'
+    - '&7Необходимо &#00FFFF3 печати &7для призыва.'
+    - ''
+    - '&8Редкий артефакт'
+  sound_place: BLOCK_END_PORTAL_FRAME_FILL
+  sound_summon: ENTITY_WITHER_SPAWN
+  particles: true
+
+auto_spawn:
+  enabled: true
+  boss: easy_boss
+  world: world
+  x: -213.45953645720707
+  y: 34.0
+  z: -4.590256046304351
+  interval_ticks: 216000
+
+messages:
+  # ═══════════════════════════════════════
+  #  АНОНС СПАВНА
+  # ═══════════════════════════════════════
+  spawn_broadcast:
+    - '&d┏ %boss% &fпоявился на ПВП арене &#E0C912/warp pvp'
+    - '&d┠ &fЗдоровье: &#FF5555%hp% ❤'
+    - '&d┗ &fКоординаты: &#E0C912%x% %y% %z%'
+
+  # ═══════════════════════════════════════
+  #  АНОНС СМЕРТИ
+  # ═══════════════════════════════════════
+  death_broadcast:
+    - '&d┏ %boss% &aповержен!'
+    - '&d┠ &fУчастников битвы: &#E0C912%players%'
+    - '&d┠ &fТоп по урону:'
+    - '%top_1%'
+    - '%top_2%'
+    - '%top_3%'
+
+  top_format: '&d┠ &f%medal% %player% &7— &#FF5555%damage% урона%reward%'
+  top_none: '&d┠ &8— Отсутствует'
+
+  # ═══════════════════════════════════════
+  #  СИСТЕМНЫЕ
+  # ═══════════════════════════════════════
+  boss_spawned: '&d┠ &aУспешно призван!'
+  boss_removed: '&d┠ &aУдален.'
+  boss_already_alive: '&d┠ &cУже призван! Сначала убейте его.'
+  no_permission: '&d┠ &cНет прав.'
+  invalid_boss: '&d┠ &cНеверный тип.'
+  items_given: '&d┠ &aВыданы предметы алтаря.'
+  config_reloaded: '&d┠ &aКонфигурация перезагружена.'
+  no_active_bosses: '&d┠ &eАктивных нет.'
+  active_bosses: '&d┠ &aЖивые:'
+  delay_info: '&d┠ &aДо следующего спавна: &#E0C912%time%'
+  delay_not_running: '&d┠ &cАвто-спавн выключен.'
+
+  # ═══════════════════════════════════════
+  #  АЛТАРЬ
+  # ═══════════════════════════════════════
+  altar_progress: '&d┠ &eПечать установлена! &#00FFFF%current%&7/&#00FFFF3'
+  altar_title_main: '&#8B0000А&#9B1500Л&#AB2900Т&#BB3D00А&#CB5100Р&#DB6500Ь &#EB7900А&#FB8D00К&#FFAA00Т&#FFBB00И&#FFCC00В&#FFDD00И&#FFEE00Р&#FFFF00О&#FFEE00В&#FFDD00А&#FFCC00Н'
+  altar_title_sub: '&eПрибытие на ПВП арену...'

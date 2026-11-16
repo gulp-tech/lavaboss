@@ -1,0 +1,26 @@
+name: LavaBoss
+version: 1.3.0
+main: dev.musd348.lavaboss.LavaBoss
+api-version: '1.21'
+authors: [YourName]
+description: Плагин на кастомных боссов с алтарем, RGB и поддержкой Bedrock.
+
+softdepend: [PlayerPoints, Geyser-Spigot, floodgate]
+
+commands:
+  boss:
+    description: Управление боссами
+    usage: /boss <spawn|items|setspawn|list|remove|reload|delay>
+    aliases: [lavaboss]
+    permission: lavaboss.use
+  lavaboss:
+    description: Алиас для команды boss
+    usage: /lavaboss
+
+permissions:
+  lavaboss.admin:
+    description: Полный доступ к управлению боссами
+    default: op
+  lavaboss.use:
+    description: Базовый доступ (команда delay)
+    default: true

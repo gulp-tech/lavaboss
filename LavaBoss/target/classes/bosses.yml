@@ -1,0 +1,113 @@
+bosses:
+  lava_guardian:
+    enabled: true # Включить или выключить этого босса
+    entity-type: ZOGLIN # Моб, из которого будет создан босс
+    name: "<#FF5500>Крушитель" # Имя босса, поддерживаются HEX цвета
+
+    stats:
+      health: 150.0 # Максимальное здоровье босса
+      damage: 40.0 # Урон босса
+      movement-speed: 0.27 # Скорость передвижения босса
+      follow-range: 40.0 # На каком расстоянии босс замечает цель
+      knockback-resistance: 0.8 # Сопротивление отбрасыванию, от 0.0 до 1.0
+
+    properties:
+      ai: true # Включить стандартный AI моба
+      aggressive: true # Сделать босса агрессивным к игрокам
+      artificial-melee: false # Искусственная атака для мирных мобов
+      gravity: true # Действует ли на босса гравитация
+      glowing: true # Включить свечение босса
+      silent: false # Отключить обычные звуки моба
+      invulnerable: false # Сделать босса полностью неуязвимым
+      persistent: true # Не позволять обычному Minecraft удалить босса
+      name-visible: true # Всегда показывать имя над боссом
+
+    artificial-melee:
+      range: 2.7 # Дистанция искусственной атаки
+      cooldown-ticks: 20 # Задержка между атаками, 20 тиков = примерно 1 секунда
+
+    flags:
+      players-only-damage: false # Только игроки могут наносить боссу урон
+      immune-fire: true # Иммунитет к огню
+      immune-lava: true # Иммунитет к лаве
+      immune-drowning: true # Иммунитет к утоплению
+      immune-fall: false # Иммунитет к урону от падения
+      immune-projectiles: false # Иммунитет к стрелам и другим снарядам
+      immune-explosions: false # Иммунитет ко взрывам
+      prevent-knockback: false # Запретить отбрасывание босса
+      pickup-items: false # Может ли босс подбирать предметы
+      vanilla-drops: false # Оставлять стандартный дроп выбранного моба
+
+    effects:
+      FIRE_RESISTANCE:
+        enabled: true # Включить этот эффект
+        amplifier: 0 # Уровень эффекта, 0 = I, 1 = II, 2 = III
+        particles: false # Показывать частицы эффекта
+        icon: false # Показывать иконку эффекта
+
+    equipment:
+      enabled: true # Включить кастомную экипировку
+      helmet: null # Шлем или голова босса
+      chestplate: null # Нагрудник босса
+      leggings: null # Поножи босса
+      boots: null # Ботинки босса
+      main-hand: null # Предмет в основной руке
+      off-hand: null # Предмет во второй руке
+
+    loot-table: lava_guardian # Название таблицы наград из loot.yml
+
+    spawn:
+      mode: RANDOM_RADIUS # FIXED = точка, RANDOM_RADIUS = случайный радиус
+      world: world # Мир появления босса
+
+      fixed:
+        x: 0.5 # Координата X
+        y: 70.0 # Координата Y
+        z: 0.5 # Координата Z
+        yaw: 0.0 # Поворот босса
+        pitch: 0.0 # Наклон босса
+
+      random:
+        center-x: 0 # X центра случайного спавна
+        center-z: 0 # Z центра случайного спавна
+        minimum-radius: 100 # Минимальный радиус появления
+        maximum-radius: 1000 # Максимальный радиус появления
+        attempts: 50 # Сколько раз искать безопасное место
+
+      auto:
+        enabled: false # Включить автоматическое появление этого босса
+        minimum-delay-seconds: 1800 # Минимальная задержка в секундах
+        maximum-delay-seconds: 3600 # Максимальная задержка в секундах
+        maximum-alive: 1 # Максимальное количество одновременно живых таких боссов
+
+    announcement:
+      enabled: true # Включить объявление о появлении
+
+      chat:
+        enabled: true # Показывать сообщение в чате
+        text: "<#FF5500>{boss} <white>появился!" # Текст сообщения
+
+      title:
+        enabled: true # Показывать Title на экране
+        title: "<#FF3300><bold>БОСС ПОЯВИЛСЯ</bold>" # Верхняя строка
+        subtitle: "{boss}" # Нижняя строка
+        fade-in-millis: 500 # Время появления Title
+        stay-millis: 3000 # Сколько Title остаётся на экране
+        fade-out-millis: 500 # Время исчезновения Title
+
+      actionbar:
+        enabled: false # Показывать объявление над хотбаром
+        text: "<white>{boss} <gray>появился!" # Текст ActionBar
+
+      sound:
+        enabled: true # Проигрывать звук при появлении
+        name: ENTITY_WITHER_SPAWN # Название звука Minecraft
+        volume: 1.0 # Громкость звука
+        pitch: 1.0 # Высота звука
+
+    bossbar:
+      enabled: true # Показывать BossBar
+      title: "{boss} <gray>• <#FF5555>{health}<gray>/<#FF5555>{max_health}" # Текст BossBar
+      color: RED # Цвет полосы
+      overlay: PROGRESS # Стиль полосы
+      range: 48.0 # Дистанция, на которой игрок видит BossBar

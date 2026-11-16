@@ -1,0 +1,11 @@
+tables:
+  lava_guardian:
+    enabled: true
+    clear-vanilla: true
+
+    experience:
+      enabled: true
+      minimum: 100
+      maximum: 250
+
+    items: {}
