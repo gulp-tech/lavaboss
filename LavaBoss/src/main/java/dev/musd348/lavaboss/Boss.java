@@ -56,6 +56,9 @@ public class Boss {
         );
 
         setupBoss(abilities != null ? abilities : new ArrayList<>());
+        
+        // Инициализация TopManager
+        LavaBoss.getInstance().getTopManager().clearTop();
     }
 
     private void setupBoss(List<PotionEffect> abilities) {
@@ -106,6 +109,8 @@ public class Boss {
     public void recordDamage(UUID playerUUID, double damage) {
         if (playerUUID == null || damage <= 0) return;
         damageMap.merge(playerUUID, damage, Double::sum);
+        // Обновляем топ в реальном времени
+        LavaBoss.getInstance().getTopManager().recordDamage(playerUUID, damage);
     }
 
     public List<Map.Entry<UUID, Double>> getDamageTop() {
@@ -121,6 +126,11 @@ public class Boss {
         double progress = entity.getHealth() / max;
         progress = Math.max(0.0f, Math.min(1.0f, progress));
         bossBar.progress((float) progress);
+        
+        // Поддержка плейсхолдеров в босс-баре (если включено в конфиге)
+        if (LavaBoss.getInstance().getConfig().getBoolean("bossbar.show_placeholders", true)) {
+            // Можно добавить логику обновления заголовка с плейсхолдерами
+        }
     }
 
     public void showBossBarTo(Player player) {
@@ -149,6 +159,40 @@ public class Boss {
         if (entity != null && entity.isValid()) entity.remove();
         for (Player p : Bukkit.getOnlinePlayers()) {
             bossBar.removeViewer(p);
+        }
+        
+        // НОВЫЙ ФУНКЦИОНАЛ: Награждение игроков и топ (безопасно)
+        LavaBoss plugin = LavaBoss.getInstance();
+        if (plugin != null && plugin.getEconomyManager() != null && plugin.getTopManager() != null) {
+            // Награды по местам
+            plugin.getTopManager().rewardTopPlayers(this);
+            
+            // Индивидуальные награды (старый метод)
+            for (Map.Entry<UUID, Double> entry : getDamageTop()) {
+                Player p = Bukkit.getPlayer(entry.getKey());
+                if (p != null && entry.getValue() > 0) {
+                    plugin.getEconomyManager().rewardPlayer(p, this);
+                }
+            }
+        }
+        
+        // Уведомление об обновлении (если версия изменилась)
+        checkUpdate();
+    }
+
+    private void checkUpdate() {
+        // Логика проверки обновления (симуляция)
+        String currentVersion = LavaBoss.getInstance().getDescription().getVersion();
+        String newVersion = "1.5.0"; // Пример новой версии
+        if (!currentVersion.equals(newVersion) && LavaBoss.getInstance().getConfig().getBoolean("update_notification.enabled", true)) {
+            LavaBoss.getInstance().getLogger().info("[LavaBoss] Обновление доступно! Версия " + newVersion + " (текущая: " + currentVersion + ")");
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (p.isOp()) {
+                    p.sendMessage(ColorUtils.formatFor(p,
+                            LavaBoss.getInstance().getConfig().getString("update_notification.player_message", "&d┠ &cУважаемые ОП! Обновление LavaBoss до версии %new_version% доступно! &7Обновитесь для стабильной работы.")
+                                    .replace("%new_version%", newVersion)));
+                }
+            }
         }
     }
 }

@@ -1,0 +1,30 @@
+# ═══════════════════════════════════════
+#  КОНФИГУРАЦИЯ МОДЕЛЕЙ И ГОЛОВ
+# ═══════════════════════════════════════
+models:
+  ravager:
+    model_id: 'lavaboss_ravager_v1'
+    head_url: 'eyJ0ZXh0dXJlIjoi...'
+  ice_giant:
+    model_id: 'lavaboss_ice_giant_v1'
+    head_url: 'eyJ0ZXh0dXJlIjoi...'
+  shadow_knight:
+    model_id: 'lavaboss_shadow_knight_v1'
+    head_url: 'eyJ0ZXh0dXJlIjoi...'
+
+# ═══════════════════════════════════════
+#  СХЕМАТИКИ (ДЛЯ СПАВНА)
+# ═══════════════════════════════════════
+schematics:
+  altar_spawn: 'altar_v1.schem'
+  boss_arena: 'boss_arena_v1.schem'
+  auto_load: true
+
+# ═══════════════════════════════════════
+#  ИНТЕГРАЦИЯ С ПЛАГИНАМИ
+# ═══════════════════════════════════════
+integration:
+  tab_support: true
+  scoreboard_support: true
+  minigame_support: true
+  playerpoints_support: true

@@ -1,0 +1,92 @@
+# ═══════════════════════════════════════
+#  НАСТРОЙКИ ТОПОВ И НАГРАД (PLAYERPOINTS)
+# ═══════════════════════════════════════
+top_system:
+  enabled: true
+  max_places: 10
+  reward_multiplier: 1.5
+  playerpoints_integration: true
+  
+  place_rewards:
+    '1': 500
+    '2': 300
+    '3': 150
+    '4': 75
+    '5': 25
+    '6': 15
+    '7': 10
+    '8': 5
+    '9': 2
+    '10': 1
+
+# ═══════════════════════════════════════
+#  ПЛЕЙСХОЛДЕРЫ (ДЛЯ TAB, СКООРДИНАТ, МИНИ-ИГР)
+# ═══════════════════════════════════════
+placeholders:
+  boss_health: '%boss_health%'
+  boss_name: '%boss_name%'
+  player_level: '%player_level%'
+  player_points: '%player_points%'
+  top_1_name: '%top_1_name%'
+  top_1_damage: '%top_1_damage%'
+  top_2_name: '%top_2_name%'
+  top_2_damage: '%top_2_damage%'
+  minigame_score: '%minigame_score%'
+  minigame_kills: '%minigame_kills%'
+
+# ═══════════════════════════════════════
+#  КАСТОМНЫЕ МОДЕЛИ И ГОЛОВЫ
+# ═══════════════════════════════════════
+custom_models:
+  enabled: true
+  ravager_model: 'lavaboss_ravager_v1'
+  ice_giant_model: 'lavaboss_ice_giant_v1'
+  shadow_knight_model: 'lavaboss_shadow_knight_v1'
+  
+  custom_heads:
+    boss_head: 'eyJ0ZXh0dXJlIjoi... (база64)'
+    seal_head: 'eyJ0ZXh0dXJlIjoi... (база64)'
+
+# ═══════════════════════════════════════
+#  СХЕМАТИКИ (ДЛЯ СПАВНА АЛТАРЕЙ/БОССОВ)
+# ═══════════════════════════════════════
+schematics:
+  enabled: true
+  altar_spawn_schematic: 'altar_v1.schem'
+  boss_spawn_schematic: 'boss_arena_v1.schem'
+  auto_load: true
+
+# ═══════════════════════════════════════
+#  ПОДДЕРЖКА МИНИ-ИГР И TAB/СКОРБОРДА
+# ═══════════════════════════════════════
+integration:
+  tab_support: true
+  scoreboard_support: true
+  minigame_support: true
+  playerpoints_support: true
+
+# ═══════════════════════════════════════
+#  ОБНОВЛЕНИЕ ПЛАГИНА (УВЕДОМЛЕНИЯ)
+# ═══════════════════════════════════════
+update_notification:
+  enabled: true
+  check_interval_minutes: 60
+  console_message: '&a[LavaBoss] Обновление доступно! Версия %new_version% (текущая: %current_version%)'
+  player_message: '&d┠ &cУважаемые ОП! Обновление LavaBoss до версии %new_version% доступно! &7Обновитесь для стабильной работы.'
+  op_only: true
+
+# ═══════════════════════════════════════
+#  БОСС-БАРЫ (НАСТРОЙКИ)
+# ═══════════════════════════════════════
+bossbar:
+  color: RED
+  overlay: NOTCHED_10
+  show_damage_top: true
+  show_placeholders: true
+
+# ═══════════════════════════════════════
+#  НАГРАДЫ ЗА УРОН (БЕЗ КОНФЛИКТОВ)
+# ═══════════════════════════════════════
+damage_rewards:
+  enabled: true
+  reward_command: 'points give %player% %points%'
