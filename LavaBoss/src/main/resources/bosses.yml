@@ -1,113 +1,529 @@
 bosses:
   lava_guardian:
-    enabled: true # Включить или выключить этого босса
-    entity-type: ZOGLIN # Моб, из которого будет создан босс
-    name: "<#FF5500>Крушитель" # Имя босса, поддерживаются HEX цвета
+    enabled: true
+    entity-type: ZOGLIN
+    name: "<#FF5500>Крушитель"
 
     stats:
-      health: 150.0 # Максимальное здоровье босса
-      damage: 40.0 # Урон босса
-      movement-speed: 0.27 # Скорость передвижения босса
-      follow-range: 40.0 # На каком расстоянии босс замечает цель
-      knockback-resistance: 0.8 # Сопротивление отбрасыванию, от 0.0 до 1.0
+      health: 150.0
+      damage: 40.0
+      movement-speed: 0.27
+      follow-range: 40.0
+      knockback-resistance: 0.8
 
     properties:
-      ai: true # Включить стандартный AI моба
-      aggressive: true # Сделать босса агрессивным к игрокам
-      artificial-melee: false # Искусственная атака для мирных мобов
-      gravity: true # Действует ли на босса гравитация
-      glowing: true # Включить свечение босса
-      silent: false # Отключить обычные звуки моба
-      invulnerable: false # Сделать босса полностью неуязвимым
-      persistent: true # Не позволять обычному Minecraft удалить босса
-      name-visible: true # Всегда показывать имя над боссом
+      ai: true
+      aggressive: true
+      artificial-melee: false
+      gravity: true
+      glowing: true
+      silent: false
+      invulnerable: false
+      persistent: true
+      name-visible: true
 
     artificial-melee:
-      range: 2.7 # Дистанция искусственной атаки
-      cooldown-ticks: 20 # Задержка между атаками, 20 тиков = примерно 1 секунда
+      range: 2.7
+      cooldown-ticks: 20
 
     flags:
-      players-only-damage: false # Только игроки могут наносить боссу урон
-      immune-fire: true # Иммунитет к огню
-      immune-lava: true # Иммунитет к лаве
-      immune-drowning: true # Иммунитет к утоплению
-      immune-fall: false # Иммунитет к урону от падения
-      immune-projectiles: false # Иммунитет к стрелам и другим снарядам
-      immune-explosions: false # Иммунитет ко взрывам
-      prevent-knockback: false # Запретить отбрасывание босса
-      pickup-items: false # Может ли босс подбирать предметы
-      vanilla-drops: false # Оставлять стандартный дроп выбранного моба
+      players-only-damage: false
+      immune-fire: true
+      immune-lava: true
+      immune-drowning: true
+      immune-fall: false
+      immune-projectiles: false
+      immune-explosions: false
+      prevent-knockback: false
+      pickup-items: false
+      vanilla-drops: false
 
     effects:
       FIRE_RESISTANCE:
-        enabled: true # Включить этот эффект
-        amplifier: 0 # Уровень эффекта, 0 = I, 1 = II, 2 = III
-        particles: false # Показывать частицы эффекта
-        icon: false # Показывать иконку эффекта
+        enabled: true
+        amplifier: 0
+        particles: false
+        icon: false
 
     equipment:
-      enabled: true # Включить кастомную экипировку
-      helmet: null # Шлем или голова босса
-      chestplate: null # Нагрудник босса
-      leggings: null # Поножи босса
-      boots: null # Ботинки босса
-      main-hand: null # Предмет в основной руке
-      off-hand: null # Предмет во второй руке
+      enabled: true
+      helmet: null
+      chestplate: null
+      leggings: null
+      boots: null
+      main-hand: null
+      off-hand: null
 
-    loot-table: lava_guardian # Название таблицы наград из loot.yml
+    loot-table: lava_guardian
 
     spawn:
-      mode: RANDOM_RADIUS # FIXED = точка, RANDOM_RADIUS = случайный радиус
-      world: world # Мир появления босса
+      mode: RANDOM_RADIUS
+      world: world
 
       fixed:
-        x: 0.5 # Координата X
-        y: 70.0 # Координата Y
-        z: 0.5 # Координата Z
-        yaw: 0.0 # Поворот босса
-        pitch: 0.0 # Наклон босса
+        x: 0.5
+        y: 70.0
+        z: 0.5
+        yaw: 0.0
+        pitch: 0.0
 
       random:
-        center-x: 0 # X центра случайного спавна
-        center-z: 0 # Z центра случайного спавна
-        minimum-radius: 100 # Минимальный радиус появления
-        maximum-radius: 1000 # Максимальный радиус появления
-        attempts: 50 # Сколько раз искать безопасное место
+        center-x: 0
+        center-z: 0
+        minimum-radius: 100
+        maximum-radius: 1000
+        attempts: 50
 
       auto:
-        enabled: false # Включить автоматическое появление этого босса
-        minimum-delay-seconds: 1800 # Минимальная задержка в секундах
-        maximum-delay-seconds: 3600 # Максимальная задержка в секундах
-        maximum-alive: 1 # Максимальное количество одновременно живых таких боссов
+        enabled: false
+        minimum-delay-seconds: 1800
+        maximum-delay-seconds: 3600
+        maximum-alive: 1
 
     announcement:
-      enabled: true # Включить объявление о появлении
+      enabled: true
 
       chat:
-        enabled: true # Показывать сообщение в чате
-        text: "<#FF5500>{boss} <white>появился!" # Текст сообщения
+        enabled: true
+        text: "<#FF5500>{boss} <white>появился!"
 
       title:
-        enabled: true # Показывать Title на экране
-        title: "<#FF3300><bold>БОСС ПОЯВИЛСЯ</bold>" # Верхняя строка
-        subtitle: "{boss}" # Нижняя строка
-        fade-in-millis: 500 # Время появления Title
-        stay-millis: 3000 # Сколько Title остаётся на экране
-        fade-out-millis: 500 # Время исчезновения Title
+        enabled: true
+        title: "<#FF3300><bold>БОСС ПОЯВИЛСЯ</bold>"
+        subtitle: "{boss}"
+        fade-in-millis: 500
+        stay-millis: 3000
+        fade-out-millis: 500
 
       actionbar:
-        enabled: false # Показывать объявление над хотбаром
-        text: "<white>{boss} <gray>появился!" # Текст ActionBar
+        enabled: false
+        text: "<white>{boss} <gray>появился!"
 
       sound:
-        enabled: true # Проигрывать звук при появлении
-        name: ENTITY_WITHER_SPAWN # Название звука Minecraft
-        volume: 1.0 # Громкость звука
-        pitch: 1.0 # Высота звука
+        enabled: true
+        name: ENTITY_WITHER_SPAWN
+        volume: 1.0
+        pitch: 1.0
 
     bossbar:
-      enabled: true # Показывать BossBar
-      title: "{boss} <gray>• <#FF5555>{health}<gray>/<#FF5555>{max_health}" # Текст BossBar
-      color: RED # Цвет полосы
-      overlay: PROGRESS # Стиль полосы
-      range: 48.0 # Дистанция, на которой игрок видит BossBar
+      enabled: true
+      title: "{boss} <gray>• <#FF5555>{health}<gray>/<#FF5555>{max_health}"
+      color: RED
+      overlay: PROGRESS
+      range: 48.0
+
+    place_rewards:
+      '1': 1500
+      '2': 800
+      '3': 500
+      '4': 300
+      '5': 150
+
+  ice_giant:
+    enabled: true
+    entity-type: IRON_GOLEM
+    name: "<#00FFFF>Ледяной <#00EEFF>Титан <#00DDFF>в <#00CCFF>мире <#00BBFF>холода <#00AAFF>и <#0099FF>снега"
+
+    stats:
+      health: 3000.0
+      damage: 80.0
+      movement-speed: 0.2
+      follow-range: 40.0
+      knockback-resistance: 1.0
+
+    properties:
+      ai: true
+      aggressive: true
+      artificial-melee: false
+      gravity: true
+      glowing: true
+      silent: false
+      invulnerable: false
+      persistent: true
+      name-visible: true
+
+    artificial-melee:
+      range: 3.5
+      cooldown-ticks: 10
+
+    flags:
+      players-only-damage: false
+      immune-fire: true
+      immune-lava: true
+      immune-drowning: true
+      immune-fall: false
+      immune-projectiles: false
+      immune-explosions: false
+      prevent-knockback: false
+      pickup-items: false
+      vanilla-drops: false
+
+    effects:
+      SPEED:
+        enabled: true
+        amplifier: 1
+        particles: true
+        icon: true
+      RESISTANCE:
+        enabled: true
+        amplifier: 2
+        particles: true
+        icon: true
+      INCREASE_DAMAGE:
+        enabled: true
+        amplifier: 3
+        particles: true
+        icon: true
+
+    equipment:
+      enabled: true
+      helmet: null
+      chestplate: null
+      leggings: null
+      boots: null
+      main-hand: null
+      off-hand: null
+
+    loot-table: ice_giant
+
+    spawn:
+      mode: RANDOM_RADIUS
+      world: world
+
+      fixed:
+        x: 0.5
+        y: 70.0
+        z: 0.5
+        yaw: 0.0
+        pitch: 0.0
+
+      random:
+        center-x: 0
+        center-z: 0
+        minimum-radius: 100
+        maximum-radius: 1000
+        attempts: 50
+
+      auto:
+        enabled: false
+        minimum-delay-seconds: 1800
+        maximum-delay-seconds: 3600
+        maximum-alive: 1
+
+    announcement:
+      enabled: true
+
+      chat:
+        enabled: true
+        text: "<#00FFFF>Ледяной <#00EEFF>Титан <#00DDFF>в <#00CCFF>мире <#00BBFF>холода <#00AAFF>и <#0099FF>снега <white>появился!"
+
+      title:
+        enabled: true
+        title: "<#FF3300><bold>БОСС ПОЯВИЛСЯ</bold>"
+        subtitle: "{boss}"
+        fade-in-millis: 500
+        stay-millis: 3000
+        fade-out-millis: 500
+
+      actionbar:
+        enabled: false
+        text: "<white>{boss} <gray>появился!"
+
+      sound:
+        enabled: true
+        name: ENTITY_WITHER_SPAWN
+        volume: 1.0
+        pitch: 1.0
+
+    bossbar:
+      enabled: true
+      title: "{boss} <gray>• <#FF5555>{health}<gray>/<#FF5555>{max_health}"
+      color: RED
+      overlay: PROGRESS
+      range: 48.0
+
+    place_rewards:
+      '1': 1500
+      '2': 1000
+      '3': 600
+      '4': 300
+      '5': 100
+
+  shadow_knight:
+    enabled: true
+    entity-type: WITHER_SKELETON
+    name: "<#555555>Теневой <#4A4A4A>Владыка <#404040>в <#353535>мире <#2B2B2B>тьмы <#202020>и <#161616>смерти"
+
+    stats:
+      health: 900.0
+      damage: 70.0
+      movement-speed: 0.25
+      follow-range: 30.0
+      knockback-resistance: 0.85
+
+    properties:
+      ai: true
+      aggressive: true
+      artificial-melee: false
+      gravity: true
+      glowing: true
+      silent: false
+      invulnerable: false
+      persistent: true
+      name-visible: true
+
+    artificial-melee:
+      range: 2.5
+      cooldown-ticks: 18
+
+    flags:
+      players-only-damage: false
+      immune-fire: true
+      immune-lava: true
+      immune-drowning: true
+      immune-fall: false
+      immune-projectiles: false
+      immune-explosions: false
+      prevent-knockback: false
+      pickup-items: false
+      vanilla-drops: false
+
+    effects:
+      SPEED:
+        enabled: true
+        amplifier: 1
+        particles: true
+        icon: true
+      JUMP:
+        enabled: true
+        amplifier: 1
+        particles: true
+        icon: true
+      INCREASE_DAMAGE:
+        enabled: true
+        amplifier: 2
+        particles: true
+        icon: true
+      REGENERATION:
+        enabled: true
+        amplifier: 1
+        particles: true
+        icon: true
+
+    equipment:
+      enabled: true
+      helmet: null
+      chestplate: null
+      leggings: null
+      boots: null
+      main-hand: null
+      off-hand: null
+
+    loot-table: shadow_knight
+
+    spawn:
+      mode: RANDOM_RADIUS
+      world: world
+
+      fixed:
+        x: 0.5
+        y: 70.0
+        z: 0.5
+        yaw: 0.0
+        pitch: 0.0
+
+      random:
+        center-x: 0
+        center-z: 0
+        minimum-radius: 100
+        maximum-radius: 1000
+        attempts: 50
+
+      auto:
+        enabled: false
+        minimum-delay-seconds: 1800
+        maximum-delay-seconds: 3600
+        maximum-alive: 1
+
+    announcement:
+      enabled: true
+
+      chat:
+        enabled: true
+        text: "<#555555>Теневой <#4A4A4A>Владыка <#404040>в <#353535>мире <#2B2B2B>тьмы <#202020>и <#161616>смерти <white>появился!"
+
+      title:
+        enabled: true
+        title: "<#FF3300><bold>БОСС ПОЯВИЛСЯ</bold>"
+        subtitle: "{boss}"
+        fade-in-millis: 500
+        stay-millis: 3000
+        fade-out-millis: 500
+
+      actionbar:
+        enabled: false
+        text: "<white>{boss} <gray>появился!"
+
+      sound:
+        enabled: true
+        name: ENTITY_WITHER_SPAWN
+        volume: 1.0
+        pitch: 1.0
+
+    bossbar:
+      enabled: true
+      title: "{boss} <gray>• <#FF5555>{health}<gray>/<#FF5555>{max_health}"
+      color: RED
+      overlay: PROGRESS
+      range: 48.0
+
+    place_rewards:
+      '1': 800
+      '2': 550
+      '3': 300
+      '4': 150
+      '5': 50
+
+  easy_boss:
+    enabled: true
+    entity-type: ZOMBIE
+    name: "<#55FF55>Гниющий <#4AEE4A>Страж <#40DD40>в <#35CC35>мире <#2BBB2B>гнили <#20AA20>и <#159915>смерти"
+
+    stats:
+      health: 600.0
+      damage: 40.0
+      movement-speed: 0.2
+      follow-range: 25.0
+      knockback-resistance: 0.7
+
+    properties:
+      ai: true
+      aggressive: true
+      artificial-melee: false
+      gravity: true
+      glowing: true
+      silent: false
+      invulnerable: false
+      persistent: true
+      name-visible: true
+
+    artificial-melee:
+      range: 2.0
+      cooldown-ticks: 20
+
+    flags:
+      players-only-damage: false
+      immune-fire: false
+      immune-lava: false
+      immune-drowning: false
+      immune-fall: false
+      immune-projectiles: false
+      immune-explosions: false
+      prevent-knockback: false
+      pickup-items: false
+      vanilla-drops: false
+
+    effects:
+      SPEED:
+        enabled: true
+        amplifier: 1
+        particles: true
+        icon: true
+      REGENERATION:
+        enabled: true
+        amplifier: 1
+        particles: true
+        icon: true
+      INCREASE_DAMAGE:
+        enabled: true
+        amplifier: 1
+        particles: true
+        icon: true
+
+    equipment:
+      enabled: true
+      helmet: null
+      chestplate: null
+      leggings: null
+      boots: null
+      main-hand: null
+      off-hand: null
+
+    loot-table: easy_boss
+
+    spawn:
+      mode: RANDOM_RADIUS
+      world: world
+
+      fixed:
+        x: 0.5
+        y: 70.0
+        z: 0.5
+        yaw: 0.0
+        pitch: 0.0
+
+      random:
+        center-x: 0
+        center-z: 0
+        minimum-radius: 100
+        maximum-radius: 1000
+        attempts: 50
+
+      auto:
+        enabled: false
+        minimum-delay-seconds: 1800
+        maximum-delay-seconds: 3600
+        maximum-alive: 1
+
+    announcement:
+      enabled: true
+
+      chat:
+        enabled: true
+        text: "<#55FF55>Гниющий <#4AEE4A>Страж <#40DD40>в <#35CC35>мире <#2BBB2B>гнили <#20AA20>и <#159915>смерти <white>появился!"
+
+      title:
+        enabled: true
+        title: "<#FF3300><bold>БОСС ПОЯВИЛСЯ</bold>"
+        subtitle: "{boss}"
+        fade-in-millis: 500
+        stay-millis: 3000
+        fade-out-millis: 500
+
+      actionbar:
+        enabled: false
+        text: "<white>{boss} <gray>появился!"
+
+      sound:
+        enabled: true
+        name: ENTITY_WITHER_SPAWN
+        volume: 1.0
+        pitch: 1.0
+
+    bossbar:
+      enabled: true
+      title: "{boss} <gray>• <#FF5555>{health}<gray>/<#FF5555>{max_health}"
+      color: RED
+      overlay: PROGRESS
+      range: 48.0
+
+    place_rewards:
+      '1': 300
+      '2': 200
+      '3': 100
+      '4': 50
+      '5': 10
+
+  altar:
+    block_material: END_PORTAL_FRAME
+    seal_material: NETHER_STAR
+    seal_name: "<#FFAA00>Древняя <#FFBB11>Печать <#FFCC22>в <#FFDD33>мире <#FFEE44>лавы <#FFFF55>и <#FFFF66>огня"
+    seal_lore:
+      - "<white>Нажмите <#E0C912>ПКМ <white>по Магическому Алтарю,"
+      - "<white>чтобы установить эту печать."
+      - "<white>Необходимо <#00FFFF>3 <white>печати <white>для призыва."
+      - ""
+      - "<gray>Редкий артефакт"
+    sound_place: BLOCK_END_PORTAL_FRAME_FILL
+    sound_summon: ENTITY_WITHER_SPAWN
+    particles: true

@@ -71,8 +71,7 @@ public class BossCommand implements CommandExecutor, TabCompleter {
                     return true;
                 }
                 Location loc = getSpawnLocation();
-                if (loc == null && sender instanceof Player p)
-                    loc = p.getLocation();
+                if (loc == null && sender instanceof Player p) loc = p.getLocation();
                 if (loc == null) {
                     sender.sendMessage(fmt(sender,
                             "&d┠ &cТочка спавна не установлена."));
@@ -112,7 +111,7 @@ public class BossCommand implements CommandExecutor, TabCompleter {
                         plugin.getItemManager().getAltarBlock(1));
                 player.getInventory().addItem(
                         plugin.getItemManager().getSealItem(3));
-                player.sendMessage(fmt(player,
+                player.sendMessage(fmt(sender,
                         plugin.getConfig().getString(
                                 "messages.items_given", "&d┠ &aПредметы выданы.")));
             }
@@ -176,6 +175,31 @@ public class BossCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(fmt(sender, msg));
             }
 
+            // НОВЫЙ КОМАНДНЫЙ ФУНКЦИОНАЛ: /boss points
+            case "points" -> {
+                if (!(sender instanceof Player player)) {
+                    sender.sendMessage(fmt(sender, "&d┠ &cТолько для игроков."));
+                    return true;
+                }
+                int pts = plugin.getEconomyManager().getPlayerPoints(player);
+                int lvl = plugin.getEconomyManager().getPlayerLevel(player);
+                sender.sendMessage(fmt(sender, "&d┠ &aВаши очки: &e" + pts + " &b| Уровень: &e" + lvl));
+            }
+
+            // НОВЫЙ КОМАНДНЫЙ ФУНКЦИОНАЛ: /boss teleport
+            case "teleport" -> {
+                if (!(sender instanceof Player player)) {
+                    sender.sendMessage(fmt(sender, "&d┠ &cТолько для игроков."));
+                    return true;
+                }
+                if (plugin.getBossManager().isBossAlive()) {
+                    Boss boss = plugin.getBossManager().getActiveBosses().iterator().next();
+                    plugin.getEconomyManager().teleportToBossSafe(player, boss);
+                } else {
+                    sender.sendMessage(fmt(sender, "&d┠ &cБоссов нет."));
+                }
+            }
+
             default -> sendHelp(sender);
         }
         return true;
@@ -209,6 +233,8 @@ public class BossCommand implements CommandExecutor, TabCompleter {
                 {"/boss remove",         "Удалить"},
                 {"/boss delay",          "Время до спавна"},
                 {"/boss reload",         "Перезагрузка"},
+                {"/boss points",         "Ваши очки и уровень"},
+                {"/boss teleport",       "Телепорт к боссу"}
         };
         for (String[] c : cmds) {
             sender.sendMessage(fmt(sender, "&e" + c[0] + " &7- " + c[1]));
@@ -222,7 +248,7 @@ public class BossCommand implements CommandExecutor, TabCompleter {
                                                 @NotNull String[] args) {
         if (args.length == 1) {
             return Arrays.asList("spawn", "random", "setspawn", "items",
-                            "list", "remove", "reload", "delay")
+                            "list", "remove", "reload", "delay", "points", "teleport")
                     .stream()
                     .filter(s -> s.startsWith(args[0].toLowerCase()))
                     .collect(Collectors.toList());

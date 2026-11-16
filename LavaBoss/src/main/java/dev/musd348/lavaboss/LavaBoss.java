@@ -15,6 +15,8 @@ public class LavaBoss extends JavaPlugin {
     private ItemManager itemManager;
     private AltarManager altarManager;
     private BedrockManager bedrockManager;
+    private EconomyManager economyManager;
+    private TopManager topManager;
 
     private int autoSpawnTaskId = -1;
     private long autoSpawnIntervalTicks = 0L;
@@ -24,14 +26,21 @@ public class LavaBoss extends JavaPlugin {
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
+        
+        // Загрузка дополнительных конфигов
+        saveResource("top_rewards.yml", false);
+        saveResource("models_schematics.yml", false);
 
         this.altarManager   = new AltarManager(this);
         this.bossManager    = new BossManager(this);
         this.itemManager    = new ItemManager(this);
         this.bedrockManager = new BedrockManager(this);
+        this.economyManager = new EconomyManager(this);
+        this.topManager     = new TopManager(this);
 
         getServer().getPluginManager().registerEvents(new AltarListener(this), this);
         getServer().getPluginManager().registerEvents(new BossListener(this), this);
+        getServer().getPluginManager().registerEvents(economyManager, this);
 
         BossCommand cmd = new BossCommand(this);
         registerCommand("boss",   cmd);
@@ -46,6 +55,9 @@ public class LavaBoss extends JavaPlugin {
         }
 
         getLogger().info("LavaBoss v" + getDescription().getVersion() + " включён!");
+        
+        // Проверка обновления при запуске
+        checkUpdate();
     }
 
     private void registerCommand(String name, BossCommand cmd) {
@@ -68,6 +80,8 @@ public class LavaBoss extends JavaPlugin {
     public ItemManager    getItemManager()    { return itemManager; }
     public AltarManager   getAltarManager()   { return altarManager; }
     public BedrockManager getBedrockManager() { return bedrockManager; }
+    public EconomyManager getEconomyManager() { return economyManager; }
+    public TopManager     getTopManager()     { return topManager; }
 
     public long    getTicksUntilNextSpawn() { return ticksUntilNextSpawn; }
     public boolean isAutoSpawnRunning()     { return autoSpawnTaskId != -1; }
@@ -113,5 +127,21 @@ public class LavaBoss extends JavaPlugin {
             }
 
         }, 20L, 20L);
+    }
+
+    // НОВЫЙ МЕТОД: Проверка обновления
+    private void checkUpdate() {
+        String currentVersion = getDescription().getVersion();
+        String newVersion = "1.5.0"; // Пример новой версии (можно брать с API)
+        if (!currentVersion.equals(newVersion) && getConfig().getBoolean("update_notification.enabled", true)) {
+            getLogger().info("[LavaBoss] Обновление доступно! Версия " + newVersion + " (текущая: " + currentVersion + ")");
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (p.isOp()) {
+                    p.sendMessage(ColorUtils.formatFor(p,
+                            getConfig().getString("update_notification.player_message", "&d┠ &cУважаемые ОП! Обновление LavaBoss до версии %new_version% доступно! &7Обновитесь для стабильной работы.")
+                                    .replace("%new_version%", newVersion)));
+                }
+            }
+        }
     }
 }

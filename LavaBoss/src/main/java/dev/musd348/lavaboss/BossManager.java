@@ -210,6 +210,14 @@ public class BossManager {
 
         plugin.getLogger().info("[Boss] " + boss.getType().getConfigKey() +
                 " телепортирован на арену.");
+        
+        // Сброс счетчика притяжения при телепортации, чтобы босс снова мог притягивать игроков
+        if (plugin.getTopManager() != null) {
+             // Сброс в TopManager (если нужно)
+        }
+        if (pullCount != null && pullCount.containsKey(boss.getEntity().getUniqueId())) {
+            pullCount.remove(boss.getEntity().getUniqueId());
+        }
     }
 
     private void pullPlayers(Boss boss) {
@@ -251,12 +259,14 @@ public class BossManager {
             private final Map<UUID, Integer>  stuckTicks    = new HashMap<>();
 
             @Override public void run() {
-                for (Boss boss : new ArrayList<>(activeBosses.values())) {
-                    if (!boss.isValid()) continue;
+                // Создаем локальную копию ключей, чтобы избежать ConcurrentModificationException
+                List<UUID> ids = new ArrayList<>(activeBosses.keySet());
+                for (UUID id : ids) {
+                    Boss boss = activeBosses.get(id);
+                    if (boss == null || !boss.isValid()) continue;
 
                     LivingEntity entity     = boss.getEntity();
                     Location     currentLoc = entity.getLocation();
-                    UUID         id         = entity.getUniqueId();
 
                     boss.updateBossBar();
                     for (Player p : Bukkit.getOnlinePlayers()) {
@@ -307,11 +317,17 @@ public class BossManager {
             private final Map<UUID, Integer> pullCount = new HashMap<>();
 
             @Override public void run() {
-                for (Boss boss : new ArrayList<>(activeBosses.values())) {
-                    if (!boss.isValid()) continue;
-                    UUID id    = boss.getEntity().getUniqueId();
+                // Используем копию ключей, чтобы избежать проблем при удалении боссов
+                List<UUID> ids = new ArrayList<>(activeBosses.keySet());
+                for (UUID id : ids) {
+                    Boss boss = activeBosses.get(id);
+                    if (boss == null || !boss.isValid()) continue;
+                    
                     int  count = pullCount.getOrDefault(id, 0);
-                    if (count >= 5) { pullCount.remove(id); continue; }
+                    if (count >= 5) { 
+                        pullCount.remove(id); 
+                        continue; 
+                    }
                     pullPlayers(boss);
                     pullCount.put(id, count + 1);
                 }
